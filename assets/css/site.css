@@ -1,0 +1,109 @@
+:root {
+  --bg: #282c35; 
+  --bg-code: #011627;
+  --white: #ffffff;
+  --red: #ff725c;
+}
+
+body {
+  color: var(--white);
+  background-color: var(--bg);
+  font-family: Montserrat, sans-serif;
+  padding: 0px;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 42rem;
+  padding: 2.5rem 0;
+  width: 80%;
+}
+
+h1 {
+  font-weight: 900;
+  font-size: 2rem;
+  line-height: 2.5rem;
+  margin: inherit;
+}
+
+h3 {
+  margin-top: 4rem;
+}
+
+a {
+  color: var(--red);
+  text-decoration: none;
+}
+
+header { 
+  margin-bottom: 3rem;
+}
+
+header a {
+  color: var(--white);
+}
+
+header.post a {
+  color: var(--red);
+}
+
+header.post h1 {
+  font-size: 1.5rem
+}
+
+article {
+  margin-bottom: 3rem;
+}
+
+article header {
+  margin-bottom: 0;
+}
+
+article header a {
+  color: var(--red);
+}
+
+article p {
+  margin: 0.5rem 0;
+}
+
+.bio {
+  display: flex;
+  margin-bottom: 5rem;
+ }
+
+.bio img {
+  border-radius: 50%;
+  border-style: none;
+  height 3.5rem;
+  max-width: 100%;
+  margin-right: 1rem;
+  padding: 0;
+  width: 3.5rem;
+}
+
+.bio p {
+  line-height: 1.65rem;
+  margin: 0;
+  max-width: 300px;
+} 
+
+.post {
+  line-height: 1.8rem;
+}
+
+.post p {
+  margin-bottom: 1.75rem;
+}
+
+.post pre {
+  background-color: black;
+  border-style: none;
+  border-radius: 10px;
+  margin-bottom: 1.75rem;
+}
+
+.post strong {
+  color: var(--red);
+}
