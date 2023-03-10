@@ -7,9 +7,8 @@ export const summary =
   "How do we express or measure the efficiency of an algorithm?";
 
 export function render() {
-  return PostLayout({
-    title,
-    content: html`
+  return html`
+    <${PostLayout} title>
       <div class="post">
         <h1>Time Complexity</h1>
 
@@ -118,6 +117,6 @@ export function render() {
           you in the next one.
         </p>
       </div>
-    `,
-  });
+    <//>
+  `;
 }

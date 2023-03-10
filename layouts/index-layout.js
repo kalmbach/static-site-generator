@@ -1,6 +1,6 @@
 import { html } from "htm/preact";
 
-export default function IndexLayout(props) {
+export default function IndexLayout({ children }) {
   return html`
     <html>
       <head>
@@ -31,7 +31,7 @@ export default function IndexLayout(props) {
         <link rel="stylesheet" type="text/css" href="/css/site.css" />
       </head>
       <body>
-        ${props.content}
+        ${children}
       </body>
     </html>
   `;

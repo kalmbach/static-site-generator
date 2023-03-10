@@ -1,6 +1,6 @@
 import { html } from "htm/preact";
 
-export default function PostLayout(props) {
+export default function PostLayout({ title, children }) {
   return html`
     <html>
       <head>
@@ -9,7 +9,7 @@ export default function PostLayout(props) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="author" content="Jorge Kalmbach" />
         <meta name="description" content="Ready for Review" />
-        <title>${props.title} - Ready for Review</title>
+        <title>${title} - Ready for Review</title>
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script
@@ -36,7 +36,7 @@ export default function PostLayout(props) {
           <header class="post">
             <h1><a href="/">Ready for Review</a></h1>
           </header>
-          ${props.content}
+          ${children}
         </div>
         <script async src="/js/prism.js"></script>
       </body>
