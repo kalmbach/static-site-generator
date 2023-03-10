@@ -6,9 +6,8 @@ export const date = "June 2021";
 export const summary = "Add annotations in your code with style";
 
 export function render() {
-  return PostLayout({
-    title,
-    content: html`
+  return html`
+    <${PostLayout} title>
       <div class="post">
         <h1>Annotate all the things!</h1>
         <p>
@@ -112,6 +111,6 @@ app/controllers/application_controller.rb:7: #REVIEW: Review all the things!
 
         <p>Until the next one.</p>
       </div>
-    `,
-  });
+    <//>
+  `;
 }

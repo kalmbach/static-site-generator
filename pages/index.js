@@ -7,7 +7,7 @@ import { readDirectory } from "../file-system.js";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const postsPath = path.join(__dirname, "posts");
 
-export function header() {
+export function Header() {
   return html`
     <header>
       <h1><a href="/">Ready for Review</a></h1>
@@ -15,7 +15,7 @@ export function header() {
   `;
 }
 
-function bio() {
+function Bio() {
   return html`
     <div class="bio">
       <img
@@ -65,11 +65,13 @@ async function listOfArticles() {
 }
 
 export async function render() {
-  return IndexLayout({
-    content: html`
+  return html`
+    <${IndexLayout}>
       <div class="container">
-        ${header()} ${bio()} ${await listOfArticles()}
+        <${Header} />
+        <${Bio} />
+        ${await listOfArticles()}
       </div>
-    `,
-  });
+    <//>
+  `;
 }

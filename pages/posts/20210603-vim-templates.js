@@ -6,9 +6,8 @@ export const date = "June 2021";
 export const summary = "How to use templates or skeletons for new files";
 
 export function render() {
-  return PostLayout({
-    title,
-    content: html`
+  return html`
+    <${PostLayout} title>
       <div class="post">
         <h1>Vim Templates</h1>
 
@@ -162,6 +161,6 @@ autocmd BufWritePre * $read ~/.vim/templates/signature
 
         <p>Until the next one.</p>
       </div>
-    `,
-  });
+    <//>
+  `;
 }

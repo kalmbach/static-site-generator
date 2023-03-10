@@ -7,9 +7,8 @@ export const summary =
   "Securely transmit information in self-contained JSON objects";
 
 export function render() {
-  return PostLayout({
-    title,
-    content: html`
+  return html`
+    <${PostLayout} title>
       <div class="post">
         <h1>JSON Web Tokens</h1>
 
@@ -294,6 +293,6 @@ Autorization: Bearer ${"<"}token${">"};
 
         <p>Until the next one.</p>
       </div>
-    `,
-  });
+    <//>
+  `;
 }
