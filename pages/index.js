@@ -33,23 +33,21 @@ function Bio() {
   `;
 }
 
-function article(props) {
+function Article({ file, title, summary, date }) {
   return html`
     <article>
       <header>
         <h1>
-          <a href="posts/${props.file.replace(/\.js$/, ".html")}">
-            ${props.title}
-          </a>
+          <a href="posts/${file.replace(/\.js$/, ".html")}"> ${title} </a>
         </h1>
       </header>
-      <p>${props.summary}</p>
-      <small>${props.date}</small>
+      <p>${summary}</p>
+      <small>${date}</small>
     </article>
   `;
 }
 
-async function listOfArticles() {
+async function ListOfArticles() {
   const files = await readDirectory(postsPath);
   const sortedFiles = files.sort().reverse();
   const articles = [];
@@ -58,10 +56,10 @@ async function listOfArticles() {
     const inFile = path.join(postsPath, file);
     const post = await import(inFile);
 
-    articles.push(article({ file, ...post }));
+    articles.push(html`<${Article} file=${file} ...${post} />`);
   }
 
-  return html` <div>${articles}</div> `;
+  return articles;
 }
 
 export async function render() {
@@ -70,7 +68,7 @@ export async function render() {
       <div class="container">
         <${Header} />
         <${Bio} />
-        ${await listOfArticles()}
+        <div>${await ListOfArticles()}</div>
       </div>
     <//>
   `;
