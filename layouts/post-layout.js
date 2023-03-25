@@ -1,42 +1,48 @@
 import { html } from "htm/preact";
+import { fileURLToPath } from "url";
+import path from "path";
+import MarkdownIt from "markdown-it";
+import { readFileSync } from "fs";
+import {
+  Title,
+  SiteName,
+  MetaTags,
+  GoogleAnalytics,
+  Stylesheets,
+} from "./globals.js";
 
-export default function PostLayout({ title, children }) {
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const contentPath = path.join(__dirname, "../content");
+const markdown = new MarkdownIt();
+
+function renderContent(fileName) {
+  const text = readFileSync(path.join(contentPath, fileName), "utf-8");
+  return markdown.render(text);
+}
+
+export default function PostLayout({ title }) {
+  const fileName = title.toLowerCase().replace(/\s/g, "-") + ".md";
+  const content = renderContent(fileName);
+
   return html`
     <html>
       <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA=Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="author" content="Jorge Kalmbach" />
-        <meta name="description" content="Ready for Review" />
-        <title>${title} - Ready for Review</title>
+        <${MetaTags} />
+        <${Title} title=${title} />
+        <${GoogleAnalytics} />
+        <${Stylesheets} />
 
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=UA-46704501-1"
-        ></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag() {
-            dataLayer.push(arguments);
-          }
-          gtag("js", new Date());
-
-          gtag("config", "UA-46704501-1");
-        </script>
-
-        <link rel="stylesheet" type="text/css" href="/css/normalize.css" />
         <link rel="stylesheet" type="text/css" href="/css/prism.css" />
-        <link rel="stylesheet" type="text/css" href="/css/fonts.css" />
-        <link rel="stylesheet" type="text/css" href="/css/site.css" />
       </head>
       <body>
         <div class="container">
           <header class="post">
-            <h1><a href="/">Ready for Review</a></h1>
+            <h1><a href="/">${SiteName}</a></h1>
           </header>
-          ${children}
+          <div
+            class="post"
+            dangerouslySetInnerHTML=${{ __html: content }}
+          ></div>
         </div>
         <script async src="/js/prism.js"></script>
       </body>
