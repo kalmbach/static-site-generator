@@ -1,10 +1,9 @@
 import { html } from "htm/preact";
 import PostLayout from "../../layouts/post-layout.js";
+import extractContent from "../../content-extractor.js";
 
-export const title = "Vim Templates";
-export const date = "June 2021";
-export const summary = "How to use templates or skeletons for new files";
+export const content = extractContent("vim-templates.md");
 
 export function render() {
-  return html`<${PostLayout} title=${title} />`;
+  return html`<${PostLayout} ...${content} />`;
 }

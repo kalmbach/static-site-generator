@@ -1,3 +1,8 @@
+---
+title: SOLID Principles
+date: June 2021
+summary: Five development principles to follow when building software
+---
 # SOLID Principles
 
 ### What is SOLID?

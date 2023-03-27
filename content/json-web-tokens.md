@@ -1,3 +1,8 @@
+---
+title: JSON Web Tokens
+date: July 2021
+summary: Securely transmit information in self-contained JSON objects
+---
 # JSON Web Tokens
 
 ### What is JSON Web Token?
