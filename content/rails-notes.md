@@ -1,3 +1,8 @@
+---
+title: Rails Notes
+date: June 2021
+summary: Add annotations in your code with style
+---
 # Annotate all the things!
 
 I acknowledge that I am not a regular user of annotations, but this

@@ -1,8 +1,4 @@
 import { html } from "htm/preact";
-import { fileURLToPath } from "url";
-import path from "path";
-import MarkdownIt from "markdown-it";
-import { readFileSync } from "fs";
 import {
   Title,
   SiteName,
@@ -11,24 +7,12 @@ import {
   Stylesheets,
 } from "./globals.js";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const contentPath = path.join(__dirname, "../content");
-const markdown = new MarkdownIt();
-
-function renderContent(fileName) {
-  const text = readFileSync(path.join(contentPath, fileName), "utf-8");
-  return markdown.render(text);
-}
-
-export default function PostLayout({ title }) {
-  const fileName = title.toLowerCase().replace(/\s/g, "-") + ".md";
-  const content = renderContent(fileName);
-
+export default function PostLayout({ metadata, article }) {
   return html`
     <html>
       <head>
         <${MetaTags} />
-        <${Title} title=${title} />
+        <${Title} title=${metadata.title} />
         <${GoogleAnalytics} />
         <${Stylesheets} />
 
@@ -41,7 +25,7 @@ export default function PostLayout({ title }) {
           </header>
           <div
             class="post"
-            dangerouslySetInnerHTML=${{ __html: content }}
+            dangerouslySetInnerHTML=${{ __html: article }}
           ></div>
         </div>
         <script async src="/js/prism.js"></script>

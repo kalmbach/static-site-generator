@@ -56,7 +56,9 @@ async function ListOfArticles() {
     const inFile = path.join(postsPath, file);
     const post = await import(inFile);
 
-    articles.push(html`<${Article} file=${file} ...${post} />`);
+    articles.push(
+      html`<${Article} file=${file} ...${post.content.metadata} />`
+    );
   }
 
   return articles;

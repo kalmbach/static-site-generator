@@ -1,3 +1,8 @@
+---
+title: Time Complexity
+date: June 2021
+summary: How do we express or measure the efficiency of an algorithm
+---
 # Time Complexity
 
 ### How fast is your algorithm?

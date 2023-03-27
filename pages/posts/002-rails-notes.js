@@ -1,10 +1,9 @@
 import { html } from "htm/preact";
 import PostLayout from "../../layouts/post-layout.js";
+import extractContent from "../../content-extractor.js";
 
-export const title = "Rails Notes";
-export const date = "June 2021";
-export const summary = "Add annotations in your code with style";
+export const content = extractContent("rails-notes.md");
 
 export function render() {
-  return html`<${PostLayout} title=${title} />`;
+  return html`<${PostLayout} ...${content} />`;
 }

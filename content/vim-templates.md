@@ -1,3 +1,8 @@
+---
+title: Vim Templates
+date: June 2021
+summary: How to use templates or skeletons for new files
+---
 # Vim Templates
 
 ### Templates and Skeletons
