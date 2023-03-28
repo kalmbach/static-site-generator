@@ -1,11 +1,8 @@
-import { html } from "htm/preact";
-import { fileURLToPath } from "url";
 import path from "path";
+import { html } from "htm/preact";
 import IndexLayout from "../layouts/index-layout.js";
 import { readDirectory } from "../file-system.js";
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const postsPath = path.join(__dirname, "posts");
+import { POSTS_PATH } from "../config.js";
 
 export function Header() {
   return html`
@@ -48,12 +45,12 @@ function Article({ file, title, summary, date }) {
 }
 
 async function ListOfArticles() {
-  const files = await readDirectory(postsPath);
+  const files = await readDirectory(POSTS_PATH);
   const sortedFiles = files.sort().reverse();
   const articles = [];
 
   for (const file of sortedFiles) {
-    const inFile = path.join(postsPath, file);
+    const inFile = path.join(POSTS_PATH, file);
     const post = await import(inFile);
 
     articles.push(

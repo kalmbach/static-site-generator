@@ -1,7 +1,6 @@
-import { fileURLToPath } from "url";
 import path from "path";
 import render from "preact-render-to-string";
-
+import { ASSETS_PATH, PAGES_PATH, BUILD_PATH } from "./config.js";
 import {
   createDirectory,
   copyDirectory,
@@ -10,11 +9,6 @@ import {
   removeDirectory,
   writeFile,
 } from "./file-system.js";
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const assetsPath = path.join(__dirname, "assets");
-const pagesPath = path.join(__dirname, "pages");
-const buildPath = path.join(__dirname, "build");
 
 async function writePage(inFile, outFile) {
   const page = await import(inFile);
@@ -37,10 +31,10 @@ async function buildPages(inPath, outPath) {
 }
 
 // reset build directory
-await removeDirectory(buildPath);
-await createDirectory(buildPath);
+await removeDirectory(BUILD_PATH);
+await createDirectory(BUILD_PATH);
 
 // copy assets
-await copyDirectory(assetsPath, buildPath);
+await copyDirectory(ASSETS_PATH, BUILD_PATH);
 
-buildPages(pagesPath, buildPath);
+buildPages(PAGES_PATH, BUILD_PATH);
