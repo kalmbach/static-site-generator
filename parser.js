@@ -48,7 +48,7 @@ function parseText(text) {
   );
 }
 
-export default function extractContent(fileName) {
+export default function parse(fileName) {
   const text = readFile(fileName);
   const [rawMetadata, rawMarkdown] = parseText(text);
 
