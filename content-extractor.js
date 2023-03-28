@@ -1,58 +1,51 @@
-import { fileURLToPath } from "url";
-import path from "path";
 import MarkdownIt from "markdown-it";
+import path from "path";
 import { readFileSync } from "fs";
+import { CONTENT_PATH } from "./config.js";
 
 function readFile(fileName) {
-  const __dirname = path.dirname(fileURLToPath(import.meta.url));
-  const contentPath = path.join(__dirname, "content");
-
-  return readFileSync(path.join(contentPath, fileName), "utf-8");
-}
-
-function renderContent(text) {
-  const markdown = new MarkdownIt();
-  return markdown.render(text);
+  return readFileSync(path.join(CONTENT_PATH, fileName), "utf-8");
 }
 
 function extractMetadata(text) {
-  const sep = "\n";
+  const lines = text.split("\n");
   const trimmed = (n) => n.trim();
 
-  return text.split(sep).reduce((metadata, keyValue) => {
-    return {
+  return lines.reduce(
+    (metadata, kvPair) => ({
       ...metadata,
-      ...Object.fromEntries([keyValue.split(":").map(trimmed)]),
-    };
-  }, {});
+      ...Object.fromEntries([kvPair.split(":").map(trimmed)]),
+    }),
+    {}
+  );
 }
 
 function parseText(text) {
-  const metadata = [];
-  const article = [];
   const sep = "\n";
-
   let extractingMetadata = false;
 
-  text.split(sep).forEach((line, index) => {
-    if (index === 0 && line === "---") {
-      extractingMetadata = !extractingMetadata;
-      return;
-    }
-
-    if (extractingMetadata) {
-      if (line === "---") {
+  return text.split(sep).reduce(
+    (parsed, line, index) => {
+      if (index === 0 && line === "---") {
         extractingMetadata = !extractingMetadata;
-        return;
+        return parsed;
       }
 
-      metadata.push(line);
-    } else {
-      article.push(line);
-    }
-  });
+      if (extractingMetadata) {
+        if (line === "---") {
+          extractingMetadata = !extractingMetadata;
+          return parsed;
+        }
 
-  return [metadata.join(sep), article.join(sep)];
+        parsed[0] += sep + line; // Metadata
+      } else {
+        parsed[1] += sep + line; // Article
+      }
+
+      return parsed;
+    },
+    ["", ""]
+  );
 }
 
 export default function extractContent(fileName) {
@@ -61,6 +54,6 @@ export default function extractContent(fileName) {
 
   return {
     metadata: extractMetadata(rawMetadata),
-    article: renderContent(rawMarkdown),
+    article: new MarkdownIt().render(rawMarkdown),
   };
 }
