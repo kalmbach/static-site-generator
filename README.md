@@ -4,6 +4,7 @@ It uses Preact server side rendering
 [preact-render-to-string](https://github.com/preactjs/preact-render-to-string)
 to generate the static html pages from Preact components.  The articles are rendered from markdown files.
 
+
 ### Source Organization
 - `assets`: all the CSS, JS and FONTS used in the site. 
 - `content`: the source of the posts in markdown.  
@@ -21,15 +22,9 @@ summary: Basic structure of an article for the blog
 ---
 # Sample Post
 
-Write your ideas here.
-
-```javascript
-// this is a block of code
-const variable = true;
-if (variable) { console.log("It's true!"); }
-```
-
+Write your ideas here.  
 Have fun
+```
 
 The `build` will take this file and generate a sample-post.html under `/posts`.  
 If you want to change the URI for the posts, you can set the `POSTS_URI` constant in `config.js` to a different value.
