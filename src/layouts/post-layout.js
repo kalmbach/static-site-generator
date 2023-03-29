@@ -1,11 +1,6 @@
 import { html } from "htm/preact";
-import {
-  Title,
-  SiteName,
-  MetaTags,
-  GoogleAnalytics,
-  Stylesheets,
-} from "./globals.js";
+import { Title, MetaTags, GoogleAnalytics, Stylesheets } from "./globals.js";
+import { SITE_NAME } from "../config.js";
 
 export default function PostLayout({ metadata, article }) {
   return html`
@@ -21,7 +16,7 @@ export default function PostLayout({ metadata, article }) {
       <body>
         <div class="container">
           <header class="post">
-            <h1><a href="/">${SiteName}</a></h1>
+            <h1><a href="/">${SITE_NAME}</a></h1>
           </header>
           <div
             class="post"

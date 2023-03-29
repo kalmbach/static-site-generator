@@ -1,11 +1,5 @@
 import { html } from "htm/preact";
-import {
-  Title,
-  SiteName,
-  MetaTags,
-  GoogleAnalytics,
-  Stylesheets,
-} from "./globals.js";
+import { Title, MetaTags, GoogleAnalytics, Stylesheets } from "./globals.js";
 
 export default function IndexLayout({ children }) {
   return html`

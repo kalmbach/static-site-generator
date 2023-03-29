@@ -1,4 +1,5 @@
 import { html } from "htm/preact";
+import { SITE_NAME } from "../config.js";
 
 export function MetaTags() {
   return html`
@@ -29,10 +30,8 @@ export function GoogleAnalytics() {
   `;
 }
 
-export const SiteName = "Ready for Review";
-
 export function Title({ title }) {
-  const fullTitle = title ? `${title} - ${SiteName}` : SiteName;
+  const fullTitle = title ? `${title} - ${SITE_NAME}` : SITE_NAME;
 
   return html`<title>${fullTitle}</title>`;
 }
