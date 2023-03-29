@@ -2,13 +2,13 @@ import path from "path";
 import { html } from "htm/preact";
 import IndexLayout from "../layouts/index-layout.js";
 import { readDirectory } from "../file-system.js";
-import { CONTENT_PATH, POSTS_URI } from "../config.js";
+import { SITE_NAME, CONTENT_PATH, POSTS_URI } from "../config.js";
 import * as content from "../content.js";
 
 export function Header() {
   return html`
     <header>
-      <h1><a href="/">Ready for Review</a></h1>
+      <h1><a href="/">${SITE_NAME}</a></h1>
     </header>
   `;
 }

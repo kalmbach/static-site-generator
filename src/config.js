@@ -10,3 +10,5 @@ export const BUILD_PATH = path.join(__dirname, "../build");
 export const CONTENT_PATH = path.join(__dirname, "../content");
 
 export const POSTS_URI = "/posts";
+
+export const SITE_NAME = "Ready for Review";
