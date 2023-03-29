@@ -2,7 +2,14 @@ import path from "path";
 import { html } from "htm/preact";
 import IndexLayout from "../layouts/index-layout.js";
 import { readDirectory } from "../file-system.js";
-import { SITE_NAME, CONTENT_PATH, POSTS_URI } from "../config.js";
+import {
+  BIO_NAME,
+  BIO_LINE,
+  BIO_LINK,
+  SITE_NAME,
+  CONTENT_PATH,
+  POSTS_URI,
+} from "../config.js";
 import * as content from "../content.js";
 
 export function Header() {
@@ -13,19 +20,24 @@ export function Header() {
   `;
 }
 
+function ProfilePicture() {
+  return html`
+    <img
+      src="/img/profile-pic.png"
+      width="50"
+      height="50"
+      alt="Profile picture"
+    />
+  `;
+}
+
 function Bio() {
   return html`
     <div class="bio">
-      <img
-        src="/img/profile-pic.png"
-        width="50"
-        height="50"
-        alt="Profile picture"
-      />
+      <${ProfilePicture} />
       <p>
-        Personal blog by
-        <a href="https://github.com/kalmbach"> Jorge Kalmbach </a>
-        <br />Write a blog they said, it will be fun.
+        Personal blog by <a href="${BIO_LINK}"> ${BIO_NAME} </a>
+        <br />${BIO_LINE}
       </p>
     </div>
   `;
