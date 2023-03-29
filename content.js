@@ -1,11 +1,9 @@
-import MarkdownIt from "markdown-it";
 import path from "path";
+import MarkdownIt from "markdown-it";
+import { html } from "htm/preact";
 import { readFileSync } from "fs";
 import { CONTENT_PATH } from "./config.js";
-
-function readFile(fileName) {
-  return readFileSync(path.join(CONTENT_PATH, fileName), "utf-8");
-}
+import PostLayout from "./layouts/post-layout.js";
 
 function extractMetadata(text) {
   const lines = text.split("\n");
@@ -48,12 +46,20 @@ function parseText(text) {
   );
 }
 
-export default function parse(fileName) {
-  const text = readFile(fileName);
+export function link(title) {
+  return title.toLowerCase().replace(/\s/g, "-") + ".html";
+}
+
+export function parse(fileName) {
+  const text = readFileSync(fileName, "utf-8");
   const [rawMetadata, rawMarkdown] = parseText(text);
 
   return {
     metadata: extractMetadata(rawMetadata),
     article: new MarkdownIt().render(rawMarkdown),
   };
+}
+
+export function render(content) {
+  return html`<${PostLayout} ...${content} />`;
 }
