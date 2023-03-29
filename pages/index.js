@@ -2,7 +2,8 @@ import path from "path";
 import { html } from "htm/preact";
 import IndexLayout from "../layouts/index-layout.js";
 import { readDirectory } from "../file-system.js";
-import { POSTS_PATH } from "../config.js";
+import { CONTENT_PATH, POSTS_URI } from "../config.js";
+import * as content from "../content.js";
 
 export function Header() {
   return html`
@@ -30,12 +31,14 @@ function Bio() {
   `;
 }
 
-function Article({ file, title, summary, date }) {
+function Article({ title, summary, date }) {
+  const linkName = content.link(title);
+
   return html`
     <article>
       <header>
         <h1>
-          <a href="posts/${file.replace(/\.js$/, ".html")}"> ${title} </a>
+          <a href="${POSTS_URI}/${linkName}"> ${title} </a>
         </h1>
       </header>
       <p>${summary}</p>
@@ -45,17 +48,15 @@ function Article({ file, title, summary, date }) {
 }
 
 async function ListOfArticles() {
-  const files = await readDirectory(POSTS_PATH);
+  const files = await readDirectory(CONTENT_PATH);
   const sortedFiles = files.sort().reverse();
   const articles = [];
 
   for (const file of sortedFiles) {
-    const inFile = path.join(POSTS_PATH, file);
-    const post = await import(inFile);
+    const inFile = path.join(CONTENT_PATH, file);
+    const post = content.parse(inFile);
 
-    articles.push(
-      html`<${Article} file=${file} ...${post.content.metadata} />`
-    );
+    articles.push(html`<${Article} ...${post.metadata} />`);
   }
 
   return articles;
