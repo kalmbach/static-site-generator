@@ -1,5 +1,6 @@
 # static-site-generator
-A static site generator for my [personal blog](https://readyforreview.ar).  
+Generate html from preact components and markdown files.
+ 
 It uses Preact server side rendering 
 [preact-render-to-string](https://github.com/preactjs/preact-render-to-string)
 to generate the static html pages from Preact components.  The articles are rendered from markdown files.
